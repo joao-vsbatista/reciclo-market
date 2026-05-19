@@ -8,7 +8,7 @@ export default async function ConversaPage({ params }: { params: { id: string } 
 
   if (!user) redirect('/auth/login')
 
-  const { data: conversation } = await supabase
+  const { data: conversation, error } = await supabase
     .from('conversations')
     .select(`
       *,
@@ -18,6 +18,9 @@ export default async function ConversaPage({ params }: { params: { id: string } 
     `)
     .eq('id', params.id)
     .single()
+
+  console.log('conversation:', conversation)
+  console.log('error:', error)
 
   if (!conversation) redirect('/dashboard/conversas')
 
