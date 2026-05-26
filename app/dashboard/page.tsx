@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Package, Gavel, TrendingUp, Plus } from 'lucide-react'
+import { Package, Gavel, TrendingUp, Plus, User } from 'lucide-react'
 import { formatCurrency } from '@/lib/formatters'
 
 async function getDashboardStats(userId: string) {
@@ -164,6 +164,12 @@ export default async function DashboardPage() {
               <Link href="/dashboard/lances">
                 <Gavel className="mr-2 h-4 w-4" />
                 Ver meus lances
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="justify-start">
+              <Link href={`/vendedor/${user.id}`}>
+                <User className="mr-2 h-4 w-4" />
+                Ver meu perfil público
               </Link>
             </Button>
           </CardContent>
