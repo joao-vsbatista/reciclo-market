@@ -45,6 +45,7 @@ export function ProductForm({ userId, userCity, userState }: ProductFormProps) {
   const [acceptsCash, setAcceptsCash] = useState(true)
   const [acceptsTrade, setAcceptsTrade] = useState(false)
   const [type, setType] = useState<'auction' | 'sale'>('auction')
+  const [duration, setDuration] = useState('7')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -84,6 +85,7 @@ export function ProductForm({ userId, userCity, userState }: ProductFormProps) {
           accepts_cash: acceptsCash,
           accepts_trade: acceptsTrade,
           type,
+          ends_at: type === 'auction' ? new Date(Date.now() + parseInt(duration) * 24 * 60 * 60 * 1000).toISOString() : null,
         })
         .select()
         .single()
@@ -253,6 +255,33 @@ export function ProductForm({ userId, userCity, userState }: ProductFormProps) {
   <CardHeader>
     <CardTitle>Formas de Lance Aceitas</CardTitle>
   </CardHeader>
+  <Card>
+  <CardHeader>
+    <CardTitle>Duração do Leilão</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="grid grid-cols-4 gap-2">
+      {['1', '3', '7', '14'].map((days) => (
+        <button
+          key={days}
+          type="button"
+          onClick={() => setDuration(days)}
+          className={`flex flex-col items-center gap-1 rounded-lg border-2 p-3 transition-colors ${
+            duration === days
+              ? 'border-primary bg-primary/5'
+              : 'border-border hover:border-primary/50'
+          }`}
+        >
+          <span className="text-xl font-bold text-foreground">{days}</span>
+          <span className="text-xs text-muted-foreground">dias</span>
+        </button>
+      ))}
+    </div>
+    <p className="mt-3 text-xs text-muted-foreground">
+      O leilão será encerrado automaticamente após o período selecionado.
+    </p>
+  </CardContent>
+</Card>
   <CardContent className="space-y-4">
     <div className="flex items-center justify-between rounded-lg border border-border p-4">
       <div>

@@ -26,6 +26,7 @@ export interface Product {
   status: ProductStatus
   created_at: string
   updated_at: string
+  ends_at?: string | null
   seller?: Profile
   images?: ProductImage[]
   bids_count?: number

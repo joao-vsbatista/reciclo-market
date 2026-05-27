@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { ProductGallery } from '@/components/product-gallery'
 import { BidForm } from '@/components/bid-form'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -17,6 +16,8 @@ import { BidActions } from '@/components/bid-actions'
 import { Breadcrumb } from '@/components/breadcrumb'
 import { ReviewForm } from '@/components/review-form'
 import { ReviewStars } from '@/components/review-stars'
+import { AuctionCountdown } from '@/components/auction-countdown'
+import { ProductGalleryZoom } from '@/components/product-gallery-zoom'
 
 interface ProductPageProps {
   params: Promise<{ id: string }>
@@ -120,7 +121,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Images */}
-            <ProductGallery images={product.images || []} title={product.title} />
+            <ProductGalleryZoom images={product.images || []} title={product.title} />
             
             {/* Details */}
             <div className="flex flex-col gap-6">
@@ -136,6 +137,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   {product.title}
                 </h1>
                 <p className="mt-4 text-3xl font-bold text-primary">
+                  {product.ends_at && (
+  <div className="mt-4">
+    <AuctionCountdown endsAt={product.ends_at} size="md" />
+  </div>
+)}
                   {formatCurrency(product.min_price)}
                   <span className="ml-2 text-sm font-normal text-muted-foreground">
                     preço mínimo

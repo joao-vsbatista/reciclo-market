@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Gavel } from 'lucide-react'
+import { Gavel, Tag } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -12,22 +12,6 @@ export function Footer() {
             </div>
             <span className="text-lg font-bold text-foreground">ReCicloMarket</span>
           </div>
-          
-          <nav className="flex flex-wrap items-center justify-center gap-6">
-            <Link 
-              href="/produtos" 
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Produtos
-            </Link>
-            <Link 
-              href="/auth/sign-up" 
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Cadastrar
-            </Link>
-          </nav>
-          
           <p className="text-sm text-muted-foreground">
             {new Date().getFullYear()} ReCicloMarket. Todos os direitos reservados.
           </p>

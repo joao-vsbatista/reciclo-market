@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { ProductFilters } from '@/components/product-filters'
+import { SidebarFilters } from '@/components/sidebar-filters'
 import { Tag, Package } from 'lucide-react'
 import { formatCurrency } from '@/lib/formatters'
 import { PRODUCT_CONDITIONS } from '@/lib/types'
@@ -72,11 +72,11 @@ async function SalesList({ params }: { params: Awaited<VendasPageProps['searchPa
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {products.map((product: any) => {
         const primaryImage = product.images?.find((img: any) => img.is_primary) || product.images?.[0]
         return (
-          <Card key={product.id} className="overflow-hidden group hover:border-primary/50 transition-colors">
+          <Card key={product.id} className="overflow-hidden group hover:shadow-md hover:border-primary/50 transition-all">
             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
               {primaryImage ? (
                 <Image
@@ -84,7 +84,7 @@ async function SalesList({ params }: { params: Awaited<VendasPageProps['searchPa
                   alt={product.title}
                   fill
                   className="object-cover transition-transform group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
@@ -98,16 +98,17 @@ async function SalesList({ params }: { params: Awaited<VendasPageProps['searchPa
               </Badge>
               <h3 className="font-semibold text-foreground line-clamp-2 mb-1">{product.title}</h3>
               {product.seller?.city && (
-                <p className="text-xs text-muted-foreground mb-3">
-                  {product.seller.city}, {product.seller.state}
+                <p className="text-xs text-muted-foreground mb-2">
+                  📍 {product.seller.city}, {product.seller.state}
                 </p>
               )}
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-lg font-bold text-primary">{formatCurrency(product.min_price)}</p>
-                <Button asChild size="sm">
-                  <Link href={`/vendas/${product.id}`}>Ver produto</Link>
-                </Button>
-              </div>
+              <p className="text-lg font-bold text-primary mb-1">{formatCurrency(product.min_price)}</p>
+              <p className="text-xs text-muted-foreground mb-3">
+                12x de {formatCurrency(product.min_price / 12)} sem juros
+              </p>
+              <Button asChild size="sm" className="w-full">
+                <Link href={`/vendas/${product.id}`}>Ver produto</Link>
+              </Button>
             </CardContent>
           </Card>
         )
@@ -125,7 +126,7 @@ export default async function VendasPage({ searchParams }: VendasPageProps) {
       <main className="flex-1">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Vendas' }]} />
-          <div className="mb-8 flex items-center gap-3">
+          <div className="mb-6 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
               <Tag className="h-5 w-5 text-primary" />
             </div>
@@ -134,12 +135,16 @@ export default async function VendasPage({ searchParams }: VendasPageProps) {
               <p className="mt-1 text-muted-foreground">Produtos com preço fixo, compre agora</p>
             </div>
           </div>
-          <div className="mb-8">
-            <ProductFilters />
+
+          {/* Layout com filtro lateral */}
+          <div className="flex gap-6 items-start">
+            <SidebarFilters />
+            <div className="flex-1 min-w-0">
+              <Suspense fallback={<Loading />}>
+                <SalesList params={params} />
+              </Suspense>
+            </div>
           </div>
-          <Suspense fallback={<Loading />}>
-            <SalesList params={params} />
-          </Suspense>
         </div>
       </main>
       <Footer />

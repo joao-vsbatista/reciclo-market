@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { ProductCard } from '@/components/product-card'
-import { ProductFilters } from '@/components/product-filters'
+import { SidebarFilters } from '@/components/sidebar-filters'
 import { Gavel, Package } from 'lucide-react'
 import type { Product, ProductCondition } from '@/lib/types'
 import { Breadcrumb } from '@/components/breadcrumb'
@@ -79,7 +79,7 @@ async function AuctionsList({ params }: { params: Awaited<LeiloesPageProps['sear
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
@@ -95,11 +95,9 @@ export default async function LeiloesPage({ searchParams }: LeiloesPageProps) {
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-
-          {/* ✅ BREADCRUMB ADICIONADO AQUI */}
           <Breadcrumb items={[{ label: 'Leilões' }]} />
 
-          <div className="mb-8 flex items-center gap-3">
+          <div className="mb-6 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
               <Gavel className="h-5 w-5 text-primary" />
             </div>
@@ -108,12 +106,16 @@ export default async function LeiloesPage({ searchParams }: LeiloesPageProps) {
               <p className="mt-1 text-muted-foreground">Dê lances e negocie o melhor preço</p>
             </div>
           </div>
-          <div className="mb-8">
-            <ProductFilters />
+
+          {/* Layout com filtro lateral */}
+          <div className="flex gap-6 items-start">
+            <SidebarFilters />
+            <div className="flex-1 min-w-0">
+              <Suspense fallback={<Loading />}>
+                <AuctionsList params={params} />
+              </Suspense>
+            </div>
           </div>
-          <Suspense fallback={<Loading />}>
-            <AuctionsList params={params} />
-          </Suspense>
         </div>
       </main>
       <Footer />

@@ -55,21 +55,28 @@ export function Header() {
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
-            <Link
-              href="/leiloes"
-              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Gavel className="h-4 w-4" />
-              Leilões
-            </Link>
-            <Link
-              href="/vendas"
-              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Tag className="h-4 w-4" />
-              Vendas
-            </Link>
-          </nav>
+  <Link
+    href="/produtos"
+    className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+  >
+    <Package className="h-4 w-4" />
+    Produtos
+  </Link>
+  <Link
+    href="/leiloes"
+    className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+  >
+    <Gavel className="h-4 w-4" />
+    Leilões
+  </Link>
+  <Link
+    href="/vendas"
+    className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+  >
+    <Tag className="h-4 w-4" />
+    Vendas
+  </Link>
+</nav>
         </div>
 
         <div className="flex items-center gap-3">
