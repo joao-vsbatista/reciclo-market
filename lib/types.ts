@@ -30,6 +30,7 @@ export interface Product {
   seller?: Profile
   images?: ProductImage[]
   bids_count?: number
+  type?: string | null
 }
 
 export interface ProductImage {

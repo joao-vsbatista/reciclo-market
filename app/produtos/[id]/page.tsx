@@ -136,17 +136,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
                   {product.title}
                 </h1>
-                <p className="mt-4 text-3xl font-bold text-primary">
-                  {product.ends_at && (
+                {product.ends_at && (
   <div className="mt-4">
     <AuctionCountdown endsAt={product.ends_at} size="md" />
   </div>
 )}
-                  {formatCurrency(product.min_price)}
-                  <span className="ml-2 text-sm font-normal text-muted-foreground">
-                    preço mínimo
-                  </span>
-                </p>
+<p className="mt-4 text-3xl font-bold text-primary">
+  {formatCurrency(product.min_price)}
+  <span className="ml-2 text-sm font-normal text-muted-foreground">
+    preço mínimo
+  </span>
+</p>
               </div>
               
               <Separator />

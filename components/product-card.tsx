@@ -17,7 +17,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const isNew = new Date(product.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)
 
   return (
-    <Link href={`/produtos/${product.id}`}>
+    <Link href={product.type === 'sale' ? `/vendas/${product.id}` : `/produtos/${product.id}`}>
       <Card className="group h-full overflow-hidden transition-all hover:shadow-lg hover:border-primary/50">
         <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           {primaryImage ? (

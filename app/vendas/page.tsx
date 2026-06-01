@@ -4,13 +4,7 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { SidebarFilters } from '@/components/sidebar-filters'
 import { Tag, Package } from 'lucide-react'
-import { formatCurrency } from '@/lib/formatters'
-import { PRODUCT_CONDITIONS } from '@/lib/types'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import Link from 'next/link'
-import Image from 'next/image'
+import { ProductCard } from '@/components/product-card'
 import type { ProductCondition } from '@/lib/types'
 import { Breadcrumb } from '@/components/breadcrumb'
 
@@ -73,46 +67,9 @@ async function SalesList({ params }: { params: Awaited<VendasPageProps['searchPa
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {products.map((product: any) => {
-        const primaryImage = product.images?.find((img: any) => img.is_primary) || product.images?.[0]
-        return (
-          <Card key={product.id} className="overflow-hidden group hover:shadow-md hover:border-primary/50 transition-all">
-            <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-              {primaryImage ? (
-                <Image
-                  src={primaryImage.url}
-                  alt={product.title}
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <Package className="h-12 w-12 text-muted-foreground/30" />
-                </div>
-              )}
-            </div>
-            <CardContent className="p-4">
-              <Badge variant="outline" className="mb-2 text-xs">
-                {PRODUCT_CONDITIONS[product.condition as keyof typeof PRODUCT_CONDITIONS]}
-              </Badge>
-              <h3 className="font-semibold text-foreground line-clamp-2 mb-1">{product.title}</h3>
-              {product.seller?.city && (
-                <p className="text-xs text-muted-foreground mb-2">
-                  📍 {product.seller.city}, {product.seller.state}
-                </p>
-              )}
-              <p className="text-lg font-bold text-primary mb-1">{formatCurrency(product.min_price)}</p>
-              <p className="text-xs text-muted-foreground mb-3">
-                12x de {formatCurrency(product.min_price / 12)} sem juros
-              </p>
-              <Button asChild size="sm" className="w-full">
-                <Link href={`/vendas/${product.id}`}>Ver produto</Link>
-              </Button>
-            </CardContent>
-          </Card>
-        )
-      })}
+      {products.map((product: any) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
   )
 }
@@ -136,7 +93,6 @@ export default async function VendasPage({ searchParams }: VendasPageProps) {
             </div>
           </div>
 
-          {/* Layout com filtro lateral */}
           <div className="flex gap-6 items-start">
             <SidebarFilters />
             <div className="flex-1 min-w-0">

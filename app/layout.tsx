@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
+import { PageTransition } from '@/components/page-transition'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${spaceGrotesk.className} antialiased min-h-screen bg-background`}>
-        {children}
+        <PageTransition>{children}</PageTransition>
         <Toaster position="top-right" richColors />
       </body>
     </html>
