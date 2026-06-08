@@ -282,7 +282,7 @@ reciclomarket/
 
 | Nome | GitHub |
 |---|---|
-| João Victor dos Santos Batista | [@joaovsb](https://github.com/joaovsb007) |
+| João Victor dos Santos Batista | [@joaovsb](https://github.com/joao-vsbatista) |
 | Kayk Alves Goulart | [@kayk](https://github.com/kaykgoulart9-png) |
 
 ---
