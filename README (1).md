@@ -2,7 +2,7 @@
 
 Marketplace digital voltado à compra e venda de produtos usados com sistema de lances, desenvolvido como projeto acadêmico na **UNIFRAN — Universidade de Franca**.
 
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://market-joaovsb007-gmailcoms-projects.vercel.app)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://reciclo-market.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://typescriptlang.org)
 [![Supabase](https://img.shields.io/badge/Supabase-Backend-green?logo=supabase)](https://supabase.com)
@@ -283,7 +283,7 @@ reciclomarket/
 | Nome | GitHub |
 |---|---|
 | João Victor dos Santos Batista | [@joaovsb007](https://github.com/joaovsb007) |
-| Kayk Alves Goulart | [@kayk](https://github.com/kaykgoulart9-png)
+| Kayk Alves Goulart | [@kayk](https://github.com/kaykgoulart9-png) |
 
 ---
 
